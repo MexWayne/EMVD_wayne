@@ -22,7 +22,7 @@ def test_big_size_raw(input_data, block_size, denoiser, a, b):
 
 	border = 32
 
-	expand_raw = np.zeros(shape=[1, int(hgt * 2.5), int(wid * 2.5), 8], dtype=np.float)
+	expand_raw = np.zeros(shape=[1, int(hgt * 2.5), int(wid * 2.5), 8], dtype=np.float32)
 
 
 	expand_raw[:,0:hgt, 0:wid,:] = stack_image
@@ -32,11 +32,11 @@ def test_big_size_raw(input_data, block_size, denoiser, a, b):
 
 	expand_raw[:,0 + border:0 + border + hgt, 0 + border:0 + border + wid,:] = stack_image
 
-	expand_res = np.zeros([1,int(hgt * 2.5), int(wid * 2.5),4], dtype=np.float)
-	expand_fusion = np.zeros([1,int(hgt * 2.5), int(wid * 2.5),4], dtype=np.float)
-	expand_denoise = np.zeros([1,int(hgt * 2.5), int(wid * 2.5),4], dtype=np.float)
-	expand_gamma = np.zeros([1,int(hgt * 2.5), int(wid * 2.5),1], dtype=np.float)
-	expand_omega = np.zeros([1, int(hgt * 2.5), int(wid * 2.5), 1], dtype=np.float)
+	expand_res = np.zeros([1,int(hgt * 2.5), int(wid * 2.5),4], dtype=np.float32)
+	expand_fusion = np.zeros([1,int(hgt * 2.5), int(wid * 2.5),4], dtype=np.float32)
+	expand_denoise = np.zeros([1,int(hgt * 2.5), int(wid * 2.5),4], dtype=np.float32)
+	expand_gamma = np.zeros([1,int(hgt * 2.5), int(wid * 2.5),1], dtype=np.float32)
+	expand_omega = np.zeros([1, int(hgt * 2.5), int(wid * 2.5), 1], dtype=np.float32)
 
 	'''process'''
 	for i in range(0 + border, hgt + border, int(block_size)):
@@ -126,13 +126,12 @@ for iso_ind in range(0,len(iso_list)):
 		ft0_fusion_data = np.zeros([1, 540, 960, 4 * 7])
 		gt_fusion_data = np.zeros([1, 540, 960, 4 * 7])
 		for time_ind in range(0,7):
-			raw_name = os.path.join(cfg.data_root[1],'indoor_raw_noisy/indoor_raw_noisy_scene{}/scene{}/ISO{}/frame{}_noisy0.tiff'.format(scene_id, scene_id, iso, frame_list[time_ind]))
+			raw_name = os.path.join(cfg.data_root[1],'indoor_raw_noisy/scene{}/ISO{}/frame{}_noisy0.tiff'.format(scene_id, iso, frame_list[time_ind]))
 			raw = cv2.imread(raw_name, -1)
 			input_full = np.expand_dims(pack_gbrg_raw(raw), axis=0)
 
-			gt_raw = cv2.imread(os.path.join(cfg.data_root[1],
-												  'indoor_raw_gt/indoor_raw_gt_scene{}/scene{}/ISO{}/frame{}_clean_and_slightly_denoised.tiff'.format(
-													  scene_id,scene_id, iso, frame_list[time_ind])), -1).astype(np.float32)
+			gt_raw = cv2.imread(os.path.join(cfg.data_root[1], 'indoor_raw_gt/scene{}/ISO{}/frame{}_clean_and_slightly_denoised.tiff'.format(
+													                                       scene_id, iso, frame_list[time_ind])), -1).astype(np.float32)
 			fgt = np.expand_dims(pack_gbrg_raw(gt_raw), axis=0)
 
 			if time_ind == 0:
