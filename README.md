@@ -1,5 +1,5 @@
 # THANKS
-thanks for the great work: EMVD
+Thanks for the great work: EMVD!
 
 # EMVD
 Efficient Multi-Stage Video Denoising With Recurrent Spatio-Temporal Fusion.
@@ -7,8 +7,8 @@ Efficient Multi-Stage Video Denoising With Recurrent Spatio-Temporal Fusion.
 EMVD is an efficient video denoising method which recursively exploit the spatio temporal correlation inherently present in natural videos through multiple cascading processing stages applied in a recurrent fashion, namely temporal fusion, spatial denoising, and spatio-temporal refinement.
 
 # Model
-the model is not given on EMVD's official link
-here the pth in ./model is trianed about 15000 epoch on one 4070Ti
+The model is not given on EMVD's official link.
+Here the pth in ./model is trianed about 15000 epoch on one 4070Ti
 
 # Overview
 This repo. is an ***unofficial*** version od EMVD mentioned by **Matteo Maggioni, Yibin Huang, Cheng Li, Shuai Xiao, Zhongqian Fu, Fenglong Song** in CVPR 2021.
